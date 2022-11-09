@@ -11,11 +11,14 @@ import urllib.parse
 import logging
 import os
 
+# database name
+db_name = 'terasort1'
+
 # mysql connection
 mysql_username = 'root'
 mysql_password = "tuTw1l3r"
 url_safe_password = urllib.parse.quote_plus(mysql_password)
-mysql_database = 'rf3'
+mysql_database = db_name
 sql_engine = create_engine(
     f'mysql+pymysql://{mysql_username}:{url_safe_password}@127.0.0.1:3306/{mysql_database}',
     pool_pre_ping=True
@@ -34,7 +37,7 @@ def run_sql_query(query):
 
 # influx connection
 try:
-    influx_client = InfluxDBClient(database='rf1')
+    influx_client = InfluxDBClient(database=db_name)
 except Exception as error:
     print(f'Influx Connection: not OK\n{error}')
     exit
@@ -71,9 +74,9 @@ for i in measurements:
 
     run_sql_query(create_table_query)
 
-    measurement = measurement.replace(":", "")
+    #measurement = measurement.replace(":", "")
 
-    series_obj = influx_client.query(f'select * from {measurement}').raw
+    series_obj = influx_client.query(f'select * from "{measurement}"').raw #put measurements in quotes bc someone decided colons in measure names was a good idea
 
     #create sql table columns
     if series_obj['series'] == []: #Skip tables that have no data (unfortunately these exist)
