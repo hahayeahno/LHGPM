@@ -31,16 +31,16 @@ import re as regex
 import urllib.parse
 import gc
 
-db_name_arr = ['rf1', 'rf2', 'rf3', 'rf4', 'rf5', 'svd1', 'svd2', 'svd3', 'svd4', 'svd5', 'terasort1', 'terasort2',
-               'terasort3', 'terasort4', 'terasort5', 'wc1', 'wc2', 'wc3', 'wc4', 'wc5']
+db_name_arr = ['yarnsvd4', 'yarnsvd5', 'yarnterasort1', 'yarnterasort2',
+               'yarnterasort3', 'yarnterasort4', 'yarnterasort5', 'yarnwc1', 'yarnwc2', 'yarnwc3', 'yarnwc4', 'yarnwc5']
 
 for name in db_name_arr:
     # Use this if mySQL and InfluxDB have the same database names
     db_name = name
 
     # mysql connection
-    mysql_username = 'root'
-    mysql_password = "tuTw1l3r"
+    mysql_username = 'RyanBenton'
+    mysql_password = "Benton1990"
     url_safe_password = urllib.parse.quote_plus(mysql_password)
     mysql_database = db_name
     sql_engine = create_engine(
